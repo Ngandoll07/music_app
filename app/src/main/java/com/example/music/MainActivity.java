@@ -39,13 +39,31 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<MusicFiles> musicFiles;
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
+    private String tUsername="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permission();
+        sendDataToFragment();
+
     }
-//allow
+
+    public String gettUsername() {
+        return tUsername;
+    }
+
+    private void sendDataToFragment() {
+        Bundle bundle = getIntent().getExtras();
+        String Username=bundle.getString("username");
+        tUsername=Username;
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.viewpaper,new AccountFragment());
+        fragmentTransaction.commit();
+
+    }
+
+    //allow
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

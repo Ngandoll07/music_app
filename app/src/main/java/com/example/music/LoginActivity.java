@@ -1,6 +1,9 @@
 package com.example.music;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,9 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.music.fragment_menu.AccountFragment;
+
 public class LoginActivity extends AppCompatActivity {
     EditText edtUsername,edtPass;
     Button btnLogin,btnCancel;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +29,11 @@ public class LoginActivity extends AppCompatActivity {
         addEvents();
     }
 
+
+
+    public void getData(String username){
+
+    }
     private void addEvents() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("password",password);
                     startActivity(intent);
                 }
+
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
+
+
 
     private void addControls() {
         edtUsername=findViewById(R.id.edtUsername);
