@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.music.LoginActivity;
-import com.example.music.MainActivity;
 import com.example.music.R;
 
 /**
@@ -19,6 +17,7 @@ import com.example.music.R;
  * create an instance of this fragment.
  */
 public class AccountFragment extends Fragment {
+    TextView txtName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,9 +27,6 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    LoginActivity loginActivity;
-    public TextView txtUserName;
-    MainActivity mainActivity;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -63,16 +59,12 @@ public class AccountFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View aView=inflater.inflate(R.layout.fragment_account, container, false);
-        mainActivity= (MainActivity) getActivity();
-        txtUserName= aView.findViewById(R.id.txtName);
-        txtUserName.setText(mainActivity.gettUsername());
-        Bundle bundle=this.getArguments();
-        return aView;
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 }
-

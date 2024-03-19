@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -38,28 +39,13 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<MusicFiles> musicFiles;
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
-    private String tUsername="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permission();
-        sendDataToFragment();
     }
-    public String gettUsername() {
-        return tUsername;
-    }
-
-    private void sendDataToFragment() {
-        Bundle bundle = getIntent().getExtras();
-        String Username=bundle.getString("username");
-        tUsername=Username;
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.viewpaper,new AccountFragment());
-        fragmentTransaction.commit();
-
-    }
-    //allow
+//allow
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -77,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void permission() {
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_MEDIA_AUDIO)
-                != PackageManager.PERMISSION_GRANTED){
+        != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.READ_MEDIA_AUDIO},REQUEST_CODE);
         }
@@ -85,9 +71,8 @@ public class MainActivity extends AppCompatActivity {
             musicFiles = getAudio(this);
             MviewPager();
         }
-
     }
-    //botNav
+//botNav
     private void MviewPager() {
         viewPager =findViewById(R.id.viewpaper);
         bottomNavigationView = findViewById(R.id.BottomNAV);
