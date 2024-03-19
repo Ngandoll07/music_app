@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_app"
     android:orientation="vertical"
     tools:context=".SignupActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         app:cardElevation="20dp"
-        android:background="@drawable/bg_app"
         app:cardCornerRadius="30dp" >
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,8 +22,8 @@
             android:padding="24dp">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/logo_music_" />
 
@@ -74,19 +74,7 @@
                 android:backgroundTint="@color/login"
                 app:cornerRadius="20dp"/>
 
-            <TextView
-                android:id="@+id/signinwithGG"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/custom_edittext"
-                android:drawableRight="@drawable/gmail"
-                android:drawablePadding="10dp"
-                android:text="Đăng nhập bằng Google"
-                android:padding="15dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="40dp"/>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

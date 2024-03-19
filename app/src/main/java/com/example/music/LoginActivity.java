@@ -8,10 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edtUsername,edtPass;
-    Button btnLogin,btnCancel;
+    Button btnLogin;
+    TextView signup_btn;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,17 @@ public class LoginActivity extends AppCompatActivity {
                 icError.setBounds(0,0,icError.getIntrinsicWidth(),icError.getIntrinsicHeight());
                 String username=edtUsername.getText().toString().trim();
                 String password=edtPass.getText().toString().trim();
+                boolean isLoggedID=dbHelper.checkUser(edtUsername.getText().toString(),
+                        edtPass.getText().toString());
+                if(isLoggedID){
+                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("username",username);
+                    intent.putExtra("password",password);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+                }
+
                 if (username.isEmpty()){
                     edtUsername.setCompoundDrawables(null,null,icError,null);
                     edtUsername.setError("Vui lòng nhập tên",icError);
@@ -37,20 +52,21 @@ public class LoginActivity extends AppCompatActivity {
                     edtPass.setCompoundDrawables(null,null,icError,null);
                     edtPass.setError("Vui lòng nhập mật khẩu",icError);
                 }
-                if (!username.isEmpty()&&!password.isEmpty()){
-                    edtUsername.setCompoundDrawables(null,null,null,null);
-                    edtPass.setCompoundDrawables(null,null,null,null);
-                    Intent intent=new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("username",username);
-                    intent.putExtra("password",password);
-                    startActivity(intent);
-                }
+//                if (!username.isEmpty()&&!password.isEmpty()){
+//                    edtUsername.setCompoundDrawables(null,null,null,null);
+//                    edtPass.setCompoundDrawables(null,null,null,null);
+//                    Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+//                    intent.putExtra("username",username);
+//                    intent.putExtra("password",password);
+//                    startActivity(intent);
+//                }
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent=new Intent(LoginActivity.this,SignupActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -59,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         edtUsername=findViewById(R.id.edtUsername);
         edtPass=findViewById(R.id.edtPass);
         btnLogin=findViewById(R.id.btnLogin);
-        btnCancel=findViewById(R.id.btnCancel);
+        signup_btn=findViewById(R.id.signup_btn);
+        dbHelper=new DBHelper(this);
     }
 }
