@@ -1,8 +1,11 @@
 package com.example.music.tab_music;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.media.MediaMetadataRetriever;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.music.PlayerActivity;
 import com.example.music.R;
 
 import java.io.IOException;
@@ -35,8 +39,27 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.music_name.setText(mFiles.get(position).getTitle());
+
+        try{
+            byte[] img=getIMGSong(mFiles.get(position).getPath());
+            if(img !=null)
+                Glide.with(mcontext).asBitmap().load(img).into(holder.album_img);
+            else
+                Glide.with(mcontext).load(R.drawable.disc).into(holder.album_img);
+        }
+        catch (Exception e){
+            Log.e("error",e.toString());
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(mcontext, PlayerActivity.class);
+                intent.putExtra("position",position);
+                mcontext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -52,6 +75,17 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             music_name=itemView.findViewById(R.id.music_name);
             album_img=itemView.findViewById(R.id.music_img);
         }
-    }
 
+    }
+    private byte[] getIMGSong(String uri){
+        MediaMetadataRetriever retriever=new MediaMetadataRetriever();
+        retriever.setDataSource(uri);
+        byte[] art=retriever.getEmbeddedPicture();
+        try {
+            retriever.release();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return art;
+    }
 }
