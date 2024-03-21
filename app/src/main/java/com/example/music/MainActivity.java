@@ -39,12 +39,28 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<MusicFiles> musicFiles;
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
+    private String tUsername="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permission();
+        sendDataToFragment();
     }
+    public String gettUsername() {
+        return tUsername;
+    }
+
+    private void sendDataToFragment() {
+        Bundle bundle = getIntent().getExtras();
+        String Username=bundle.getString("username");
+        tUsername=Username;
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.viewpaper,new AccountFragment());
+        fragmentTransaction.commit();
+
+    }
+    //allow
 //allow
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -63,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void permission() {
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_MEDIA_AUDIO)
-        != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.READ_MEDIA_AUDIO},REQUEST_CODE);
+                != PackageManager.PERMISSION_GRANTED){
         }
         else {
             musicFiles = getAudio(this);

@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/user"
                 android:drawablePadding="8dp"
                 android:hint="Tên đăng nhập"
                 android:padding="8dp"
@@ -46,6 +47,7 @@
                 android:layout_marginTop="40dp"
                 android:drawablePadding="8dp"
                 android:padding="8dp"
+                android:drawableLeft="@drawable/lock"
                 android:hint="Mật khẩu"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
@@ -58,6 +60,7 @@
                 android:layout_marginTop="40dp"
                 android:drawablePadding="8dp"
                 android:padding="8dp"
+                android:drawableLeft="@drawable/lock"
                 android:hint="Xác nhận mật khẩu"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
@@ -73,9 +76,6 @@
                 android:textColor="@color/white"
                 android:backgroundTint="@color/login"
                 app:cornerRadius="20dp"/>
-
-
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

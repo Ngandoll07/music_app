@@ -1,5 +1,6 @@
 package com.example.music.fragment_menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.music.LoginActivity;
+import com.example.music.MainActivity;
 import com.example.music.R;
 
 /**
@@ -17,7 +21,6 @@ import com.example.music.R;
  * create an instance of this fragment.
  */
 public class AccountFragment extends Fragment {
-    TextView txtName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +30,10 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    LoginActivity loginActivity;
+    public TextView txtUserName;
+    MainActivity mainActivity;
+    public Button btnLogout;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -65,6 +72,19 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View aView=inflater.inflate(R.layout.fragment_account, container, false);
+        btnLogout=aView.findViewById(R.id.btnLogout);
+        mainActivity= (MainActivity) getActivity();
+        txtUserName= aView.findViewById(R.id.txtName);
+        txtUserName.setText(mainActivity.gettUsername());
+        Bundle bundle=this.getArguments();
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(),LoginActivity.class);
+                startActivity(i);
+            }
+        });
+        return aView;
     }
 }
