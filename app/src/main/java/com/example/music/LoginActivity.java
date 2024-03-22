@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity {
     EditText edtUsername,edtPass;
     Button btnLogin;
-    TextView signup_btn;
+    TextView signup_btn,resetpass_btn;
     DBHelper dbHelper;
 
     @Override
@@ -69,6 +69,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        resetpass_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,FogetActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addControls() {
@@ -76,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         edtPass=findViewById(R.id.edtPass);
         btnLogin=findViewById(R.id.btnLogin);
         signup_btn=findViewById(R.id.signup_btn);
+        resetpass_btn=findViewById(R.id.restpass_btn);
         dbHelper=new DBHelper(this);
     }
 }
